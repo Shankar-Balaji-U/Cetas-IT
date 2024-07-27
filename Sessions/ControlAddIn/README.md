@@ -24,6 +24,9 @@ Custom BC Project
 ├── .snapshots
 ├── .vscode
 ├── src
+│   ├── table
+│   ├── page 
+│   ├── ...
 │   └── controladdin
 │       └── HelloWorld
 │           ├── js
