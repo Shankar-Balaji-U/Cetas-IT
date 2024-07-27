@@ -5,21 +5,35 @@ We can integrate Javascript in Business Central using Control AddIn.
 
 [content of MS Learn Docs](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-style), Also see about [Best Practices](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-bestpractices).
 
-## What is Control AddIn?
-It is a part of business central objects.
+## What is ControlAddIn ?
+1. It is a part of business central objects. Ex. tables, pages, reports etc.
+2. A control add-in is a custom control, or visual element, for displaying and modifying data within an iframe or a page. 
+For example, a control add-in can display the content of a webpage, visualize data as a chart or on a map, or host a custom web application. 
+3. It can exchange data with the Dynamics 365 server on various data types and respond to user interaction to raise events that execute additional AL code.
 
-## License
+## Some of the default ControlAddIn in Business Central.
 
-When contributing to the content you agree to license your contributions
-according to [our license](LICENSE.md).
 
-## Making contributions
 
-A good place to learn about general guidelines for contributing to
-[MDN Web Docs](https://developer.mozilla.org) is the
-[Guidelines document](https://developer.mozilla.org/en-US/docs/MDN/Guidelines).
-For example, you can find out more about MDN's writing-style guidelines via the
-[Writing style guide](https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Writing_style_guide).
+
+
+
+```md
+Custom BC Project
+├── .alpackages
+├── .snapshots
+├── .vscode
+├── src
+│   └── controladdin
+│       └── HelloWorld
+│           ├── js
+│           │   └── index.js
+│           ├── css
+│           │   └── index.css
+│           └── ControlAddIn.HelloWorld.al
+├── app.json
+└── Default Publisher_Custom BC Project.app
+```
 
 ### Prerequisite knowledge
 
