@@ -71,6 +71,58 @@ Before working with Control AddIns, you should be familiar with the following:
 1. **Creating a Control AddIn:**
    - Typically, the AL AZ Wizard is used to create objects in Business Central projects. However, creating a Control AddIn requires manual setup.
    - Start by creating a new AL file in your project. You can use snippets to help with the initial setup by typing the command `tcontroladdin`, which provides a template for creating a Control AddIn.
+```AL
+controladdin "Control Add-in Name"
+{
+
+    // The height and width that you want to get from the Iframe component. Values are in pixels.
+    RequestedHeight = 300;
+    RequestedWidth = 700;
+
+    // The minimum height and width that your control add-in needs. 
+    // If the available space would be less, then you'll get scrollbars. Values are in pixels.
+    MinimumHeight = 300;
+    MinimumWidth = 700;
+
+    // The maximum height and width of your control add-in. Values are in pixels.
+    MaximumHeight = 300;
+    MaximumWidth = 700;
+
+    // Boolean value indicating if the control can stretch and/or shrink horizontally or vertically.
+    VerticalStretch = true;
+    VerticalShrink = true;
+    HorizontalStretch = true;
+    HorizontalShrink = true;
+
+    // The StartupScript property is used to define which JavaScript file should be run on startup. 
+    // You can specify other JavaScript files that you need in the Scripts property.
+    StartupScript = 'src/controladdin/HelloWorld/startup.js';
+
+    // The scripts should be located within your AL extension. 
+    // You can also load external scripts over HTTP(S). 
+    // Alternatively, you can use jQuery or another JavaScript library.
+    // Example: 'https://code.jquery.com/jquery-3.2.1.min.js','script1.js';
+    Scripts = 'src/controladdin/HelloWorld/main.js';
+
+    // You can specify other JavaScript files that should be loaded and 
+    // run when the page is recreated or refreshed, respectively.
+    // RecreateScript = 'recreateScript.js';
+    // RefreshScript = 'refreshScript.js';
+
+    // The stylesheet should be located within your AL extension. 
+    StyleSheets = 'src/controladdin/HelloWorld/main.css';
+
+    // If you want to use images in your control add-in object, 
+    // you need to add them to your extension and add the filename to the Images property.
+    // Images = 'image1.png', 'image2.png';
+
+    // Throw events from Client to Server.
+    event CallFromJS();
+
+    // Throw events from Server to Client.
+    procedure CallFromAL();
+}
+```
 
 2. **Adding JavaScript:**
    - Create a JavaScript file (`.js`) and place it in the same directory as your Control AddIn AL file. This script will define the logic and behavior of your custom control.
