@@ -15,7 +15,7 @@ For example, a control add-in can display the content of a webpage, visualize da
 
 
 
-
+https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object
 
 
 ```md
@@ -45,9 +45,9 @@ before they start working on the content. If you are new to the following
 topics, we'd advise you to look at the provided links to help you get up to
 speed:
 
-- Web technologies: If you are new to HTML, CSS, JavaScript, etc., check out our
-  [Learn web development](https://developer.mozilla.org/en-US/docs/Learn) tutorials.
-- Open source: If you've never contributed to an open source project before,
+- Web technologies: If you are new to HTML(Hyper Text MarkUp Language), CSS(Cascade Style Sheet), JS(JavaScript), 
+  Check out this site [Mozilla Developer Web](https://developer.mozilla.org/en-US/docs/Learn) tutorials.
+- AL: Maybe you know Business Central, but you may not know about Control Add-In Object,
   have a read of [Basic etiquette for open source projects](https://developer.mozilla.org/en-US/docs/MDN/Contribute/Open_source_etiquette).
 - Git and GitHub: If you are unfamiliar with these tools, [GitHub for complete
   beginners](https://developer.mozilla.org/en-US/docs/MDN/Contribute/GitHub_beginners)
