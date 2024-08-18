@@ -21,6 +21,7 @@ A Control AddIn is a custom control or visual element in Business Central, allow
 - **Enhanced Data Entry:** Create custom forms or input controls that provide a more intuitive data entry experience, including features like auto-complete, validation, and complex input types.
 - **Embedded Applications:** Integrate third-party applications or custom web apps directly into Business Central pages, providing a seamless user experience.
 
+
 ## Example of a Custom Control AddIn in Business Central
 
 The structure of a typical Business Central project with a custom Control AddIn might look like this:
@@ -50,12 +51,14 @@ Custom BC Project
 - **index.css:** Provides custom styling to ensure the Control AddIn integrates smoothly with the Business Central UI.
 - **ControlAddIn.HelloWorld.al:** This AL file defines the Control AddIn object in Business Central, specifying the properties, events, and integration points.
 
+
 ## Prerequisite Knowledge
 
 Before working with Control AddIns, you should be familiar with the following:
 
 - **Web Technologies:** Basic knowledge of HTML, CSS, and JavaScript is essential. If you’re new to these technologies, explore the [Mozilla Developer Web](https://developer.mozilla.org/en-US/docs/Learn) tutorials.
 - **AL Language:** Familiarity with AL programming is crucial, especially if you’re new to the Control AddIn object. Learn the [Basics of Control AddIn](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object) to get started.
+
 
 ## Setup
 
@@ -77,6 +80,7 @@ Before working with Control AddIns, you should be familiar with the following:
 - **Performance Optimization:** Ensure your JavaScript is optimized for performance to avoid slowdowns in the Business Central UI.
 - **Responsive Design:** Use responsive design techniques in your CSS to ensure the Control AddIn looks good on different devices and screen sizes.
 - **Error Handling:** Implement robust error handling in your JavaScript code to manage unexpected behaviors and enhance user experience.
+
 
 ## Conclusion
 
