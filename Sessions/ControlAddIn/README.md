@@ -57,6 +57,11 @@ Custom BC Project
 Before working with Control AddIns, you should be familiar with the following:
 
 - **Web Technologies:** Basic knowledge of HTML, CSS, and JavaScript is essential. If you’re new to these technologies, explore the [Mozilla Developer Web](https://developer.mozilla.org/en-US/docs/Learn) tutorials.
+
+<div align="center">
+  <img width="300" alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./Resources/html_css_javascript_suit.webp">
+</div>
+
 - **AL Language:** Familiarity with AL programming is crucial, especially if you’re new to the Control AddIn object. Learn the [Basics of Control AddIn](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object) to get started.
 
 
