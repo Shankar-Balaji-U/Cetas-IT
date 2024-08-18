@@ -15,9 +15,6 @@ For example, a control add-in can display the content of a webpage, visualize da
 
 
 
-https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object
-
-
 ```md
 Custom BC Project
 ├── .alpackages
@@ -47,19 +44,17 @@ speed:
 
 - Web technologies: If you are new to HTML(Hyper Text MarkUp Language), CSS(Cascade Style Sheet), JS(JavaScript), 
   Check out this site [Mozilla Developer Web](https://developer.mozilla.org/en-US/docs/Learn) tutorials.
-- AL: Maybe you know Business Central, but you may not know about Control Add-In Object,
-  have a read of [Basic etiquette for open source projects](https://developer.mozilla.org/en-US/docs/MDN/Contribute/Open_source_etiquette).
-- Git and GitHub: If you are unfamiliar with these tools, [GitHub for complete
-  beginners](https://developer.mozilla.org/en-US/docs/MDN/Contribute/GitHub_beginners)
-  will get you started.
-- MDN's repo structures: If you are not sure what repos to edit to make changes
-  to the different parts of MDN's content,
-  [Where is everything on MDN?](https://developer.mozilla.org/en-US/docs/MDN/Contribute/Where_is_everything)
-  will point you towards the correct places.
+- AL: Maybe you know Business Central, But you may not know about Control Add-In object.
+  Check out this site [Basics of Control Add-In](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object).
 
-### Setup
+## Setup
 
-No matter how you wish to contribute, you'll need
+1 In our common practices we use AL AZ Wizard to create a object in Business Central projects. 
+But it will know give you hands. We manually need to create a AL file. Thank god, We can use snippet to get start.
+2 By typing the command tcontroladdin we can see a snippet for control addin.
+
+4 create a script file with extnsion `.js` and put it in the same directory where the control addin is present.
+
 [a GitHub account](https://github.com/join) if you don't have one already.
 If you're not familiar with [`git`](https://git-scm.com) and
 [`GitHub`](https://github.com), you might find the
