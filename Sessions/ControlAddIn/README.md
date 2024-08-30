@@ -22,7 +22,7 @@ A Control AddIn is a custom control or visual element in Business Central, allow
 - **Embedded Applications:** Integrate third-party applications or custom web apps directly into Business Central pages, providing a seamless user experience.
 
 
-## Example of a Custom Control AddIn in Business Central
+## File Structure Custom Control AddIn
 
 The structure of a typical Business Central project with a custom Control AddIn might look like this:
 
