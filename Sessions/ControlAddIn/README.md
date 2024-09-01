@@ -1,3 +1,4 @@
+<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://shopify.github.io/draggable/examples/floated.html"></iframe>
 
 # Customize Business Central UI with Control AddIns
 
@@ -56,7 +57,7 @@ Custom BC Project
 │           │   └── index.css
 │           └── ControlAddIn.HelloWorld.al
 ├── app.json
-└── Default Publisher_Custom BC Project.app
+└── Default-Publisher_Custom-BC-Project.app
 ```
 
 ### File Breakdown
@@ -73,34 +74,33 @@ Custom BC Project
 ```AL
 controladdin "Control Add-in Name"
 {
-
-    // The height and width that you want to get from the Iframe component. Values are in pixels.
+    // The height and width that you want to get from the Iframe component. (value type: pixels)
     RequestedHeight = 300;
     RequestedWidth = 700;
 
     // The minimum height and width that your control add-in needs. 
-    // If the available space would be less, then you'll get scrollbars. Values are in pixels.
+    // If the available space would be less, then you'll get scrollbars. (value type: pixels).
     MinimumHeight = 300;
     MinimumWidth = 700;
 
-    // The maximum height and width of your control add-in. Values are in pixels.
+    // The maximum height and width of your control add-in. (value type: pixels).
     MaximumHeight = 300;
     MaximumWidth = 700;
 
-    // Boolean value indicating if the control can stretch and/or shrink horizontally or vertically.
+    // Boolean value indicating if the control can stretch and/or shrink horizontally or vertically (value type: boolean).
     VerticalStretch = true;
     VerticalShrink = true;
     HorizontalStretch = true;
     HorizontalShrink = true;
 
     // The StartupScript property is used to define which JavaScript file should be run on startup. 
-    // You can specify other JavaScript files that you need in the Scripts property.
+    // You can specify other JavaScript files that you need in the Scripts property. (value type: string_path)
     StartupScript = 'src/controladdin/HelloWorld/startup.js';
 
     // The scripts should be located within your AL extension. 
     // You can also load external scripts over HTTP(S). 
-    // Alternatively, you can use jQuery or another JavaScript library.
-    // Example: 'https://code.jquery.com/jquery-3.2.1.min.js','script1.js';
+    // Alternatively, you can use jQuery or another JavaScript library. (value type: string_path)
+    // Example: 'https://code.jquery.com/jquery-3.2.1.min.js','script1.js'; 
     Scripts = 'src/controladdin/HelloWorld/main.js';
 
     // You can specify other JavaScript files that should be loaded and 
@@ -108,11 +108,11 @@ controladdin "Control Add-in Name"
     // RecreateScript = 'recreateScript.js';
     // RefreshScript = 'refreshScript.js';
 
-    // The stylesheet should be located within your AL extension. 
+    // The stylesheet should be located within your AL extension. (value type: string_path)
     StyleSheets = 'src/controladdin/HelloWorld/main.css';
 
     // If you want to use images in your control add-in object, 
-    // you need to add them to your extension and add the filename to the Images property.
+    // you need to add them to your extension and add the filename to the Images property. (value type: string_path)
     // Images = 'image1.png', 'image2.png';
 
     // Throw events from Client to Server.
@@ -122,22 +122,74 @@ controladdin "Control Add-in Name"
     procedure CallFromAL();
 }
 ```
+> [!WARNING]
+> Specify at least one JavaScript file using the Scripts property to provide the client-side functionality.
 
 2. **Adding JavaScript:**
-   - Create a JavaScript file (`.js`) and place it in the same directory as your Control AddIn AL file. This script will define the logic and behavior of your custom control.
+Create a JavaScript file (`.js`) and place it in the same directory as your Control AddIn AL file. This script will define the logic and behavior of your custom control.
 
 3. **Styling Your Control AddIn:**
-   - Use a CSS file (`.css`) to style your Control AddIn, ensuring it matches the look and feel of the Business Central environment.
+Use a CSS file (`.css`) to style your Control AddIn, ensuring it matches the look and feel of the Business Central environment.
 
 4. **Registering and Using the Control AddIn:**
-   - Once your Control AddIn is defined and your scripts are in place, register it within your Business Central page by referencing the Control AddIn object. This allows you to embed the custom control directly into Business Central pages and leverage its functionality.
+Embed the Control Add-in similar to how you would embed a Card or List part page. Using ``usercontrol`` field to a page (like a FactBox or a Role Center page) to display the custom UI component directly alongside other page elements.
+
+```AL
+ layout
+    {
+        area(Content)
+        {
+            group(General)
+            {
+                usercontrol(HelloWorld; HelloWorld)
+                {
+                    ApplicationArea = Basic;
+                }
+            }
+        }
+
+        area(FactBoxs)
+        {
+            usercontrol(HelloWorld; HelloWorld)
+            {
+                ApplicationArea = Basic;
+            }
+        }
+    }
+```
+
+
+6. **Exchanging Result:**
+   - To transfer a result from an AL method to the client, just add a method to the control add-in interface (in javascript) that the AL trigger can invoke to send the result to the script.
+   - To transfer a result from a script method to an AL trigger, just add an event to the control add-in interface that the script method can use to invoke an AL trigger that receives the result.
+```mermaid
+flowchart LR;
+    S1("Server (AL Code)") -- "Use procedure MethodName(data)" --> C1("Client (JavaScript)");
+    C2("Client (JavaScript)") -- "Use event EventName(data)" --> S2("Server (AL Code)");
+```
 
 ### Best Practices
-- **Performance Optimization:** Ensure your JavaScript is optimized for performance to avoid slowdowns in the Business Central UI.
+
+- **Modular Design:** Break your add-in into smaller, reusable modules for easier development and maintenance.
+- **Performance Optimization:** When developing control add-ins it's important to provide the best possible experience, as well as performance so that users can maintain their productivity without interruption.
 - **Responsive Design:** Use responsive design techniques in your CSS to ensure the Control AddIn looks good on different devices and screen sizes.
 - **Error Handling:** Implement robust error handling in your JavaScript code to manage unexpected behaviors and enhance user experience.
 
+> [!TIP]
+> To ensure a consistent and visually appealing user experience, follow Microsoft's styling guidelines. You can find the official styling guide and resources provided by Microsoft [here](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-style)
 
 ## Conclusion
 
 Control AddIns offer a powerful way to extend and customize the Business Central UI, providing users with enhanced interactive experiences. By following the setup guide and best practices, you can create custom controls that integrate seamlessly with Business Central, offering new capabilities and improving overall productivity.
+
+
+
+
+
+
+
+
+
+
+
+
