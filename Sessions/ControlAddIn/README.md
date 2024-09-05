@@ -1,5 +1,3 @@
-<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://shopify.github.io/draggable/examples/floated.html"></iframe>
-
 # Customize Business Central UI with Control AddIns
 
 This guide explains how to use Control AddIns in Business Central to customize the user interface by integrating JavaScript. Control AddIns allow you to create rich, interactive components that enhance the user experience within the Business Central environment.
@@ -15,6 +13,7 @@ Before working with Control AddIns, you should be familiar with the following:
 <div align="center">
   <img width="300" alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./Resources/html_css_javascript_suit.webp">
 </div>
+
 
 - **AL Language:** Familiarity with AL programming is crucial, especially if you’re new to the Control AddIn object. Learn the [Basics of Control AddIn](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object) to get started.
 
@@ -123,7 +122,8 @@ controladdin "Control Add-in Name"
 }
 ```
 > [!WARNING]
-> Specify at least one JavaScript file using the Scripts property to provide the client-side functionality.
+> If you not satisfy the minimum certeria of add at least one JavaScript file using the Scripts property will end up with this below error message.
+> <div align="center"><img width="300" alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./Resources/does-not-satisfy-the-minimum-criteria.png"></div>
 
 2. **Adding JavaScript:**
 Create a JavaScript file (`.js`) and place it in the same directory as your Control AddIn AL file. This script will define the logic and behavior of your custom control.
