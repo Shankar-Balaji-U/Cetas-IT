@@ -182,12 +182,16 @@ flowchart LR;
 
 Control AddIns offer a powerful way to extend and customize the Business Central UI, providing users with enhanced interactive experiences. By following the setup guide and best practices, you can create custom controls that integrate seamlessly with Business Central, offering new capabilities and improving overall productivity.
 
+### Reference
+## Web Development
+[Web Development Doc](https://developer.mozilla.org/en-US/)
+[![My Skills](https://skillicons.dev/icons?i=java,kotlin,nodejs,figma&theme=light)](https://skillicons.dev)
+[Bootstrap CSS Framework](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+## Control AddIn Doc
 
 
-
-
-
-
+## Interesting JS Stuffs
 
 
 
