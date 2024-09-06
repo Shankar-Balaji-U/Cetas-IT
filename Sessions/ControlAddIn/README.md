@@ -182,18 +182,25 @@ flowchart LR;
 
 Control AddIns offer a powerful way to extend and customize the Business Central UI, providing users with enhanced interactive experiences. By following the setup guide and best practices, you can create custom controls that integrate seamlessly with Business Central, offering new capabilities and improving overall productivity.
 
-### Reference
-## Web Development
-[Web Development Doc](https://developer.mozilla.org/en-US/)
-[![My Skills](https://skillicons.dev/icons?i=java,kotlin,nodejs,figma&theme=light)](https://skillicons.dev)
+## Reference
+### Web Development
+[Mozilla Developer Web](https://developer.mozilla.org/en-US/)
+
 [Bootstrap CSS Framework](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
-## Control AddIn Doc
+[Tailwind CSS Framework](https://tailwindcss.com/)
+
+### Control AddIn Doc
+
+[About Control Add-In Object](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-object)
+
+[Improve Performance](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-bestpractices)
+
+[Control Add-In Styling](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-control-addin-style?source=recommendations)
 
 
-## Interesting JS Stuffs
+### Interesting JS Stuffs
 
+[Draggable JS](https://shopify.github.io/draggable/)
 
-
-
-
+[jQuery Datepicker](https://jqueryui.com/datepicker/)
