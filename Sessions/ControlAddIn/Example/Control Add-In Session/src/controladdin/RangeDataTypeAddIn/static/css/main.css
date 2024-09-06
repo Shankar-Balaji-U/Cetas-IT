@@ -1,0 +1,109 @@
+/* Define CSS variables in :root */
+:root {
+    --ms-form-range-thumb-height: 16px; /* Replace with actual value */
+    --ms-form-range-thumb-width: 16px; /* Replace with actual value */
+    --ms-form-range-thumb-focus-box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Replace with actual value */
+    --ms-form-range-thumb-bg: #007E87; /* Replace with actual value */
+    --ms-form-range-thumb-active-bg: #00777F !important; /* Replace with actual value */
+    --ms-form-range-thumb-border: 1px solid #ccc; /* Replace with actual value */
+    --ms-form-range-thumb-border-radius: 50%; /* Replace with actual value */
+    --ms-form-range-thumb-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Replace with actual value */
+    --ms-form-range-thumb-transition: background-color .15s ease-in-out, box-shadow .15s ease-in-out; /* Replace with actual value */
+    --ms-form-range-track-width: 100%; /* Replace with actual value */
+    --ms-form-range-track-height: 8px; /* Replace with actual value */
+    --ms-form-range-track-cursor: pointer; /* Replace with actual value */
+    --ms-form-range-track-bg: #ddd; /* Replace with actual value */
+    --ms-form-range-track-border-radius: 5px; /* Replace with actual value */
+    --ms-form-range-track-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Replace with actual value */
+    --ms-form-range-thumb-disabled-bg: #e9ecef; /* Replace with actual value */
+  }
+  
+  .ms-form-range {
+    width: 100%;
+    height: calc(var(--ms-form-range-thumb-height) + 4px); /* Adjust for focus box-shadow width */
+    padding: 0;
+    appearance: none;
+    background-color: transparent;
+  }
+  
+  .ms-form-range:focus {
+    outline: 0;
+  }
+  
+  .ms-form-range:focus::-webkit-slider-thumb {
+    box-shadow: var(--ms-form-range-thumb-focus-box-shadow);
+  }
+  
+  .ms-form-range:focus::-moz-range-thumb {
+    box-shadow: var(--ms-form-range-thumb-focus-box-shadow);
+  }
+  
+  .ms-form-range::-moz-focus-outer {
+    border: 0;
+  }
+  
+  .ms-form-range::-webkit-slider-thumb {
+    width: var(--ms-form-range-thumb-width);
+    height: var(--ms-form-range-thumb-height);
+    margin-top: calc((var(--ms-form-range-track-height) - var(--ms-form-range-thumb-height)) * .5);
+    appearance: none;
+    background: var(--ms-form-range-thumb-bg);
+    border: var(--ms-form-range-thumb-border);
+    border-radius: var(--ms-form-range-thumb-border-radius);
+    box-shadow: var(--ms-form-range-thumb-box-shadow);
+    transition: var(--ms-form-range-thumb-transition);
+  }
+  
+  .ms-form-range::-webkit-slider-thumb:active {
+    background: var(--ms-form-range-thumb-active-bg);
+  }
+  
+  .ms-form-range::-webkit-slider-runnable-track {
+    width: var(--ms-form-range-track-width);
+    height: var(--ms-form-range-track-height);
+    color: transparent;
+    cursor: var(--ms-form-range-track-cursor);
+    background-color: var(--ms-form-range-track-bg);
+    border-color: transparent;
+    border-radius: var(--ms-form-range-track-border-radius);
+    box-shadow: var(--ms-form-range-track-box-shadow);
+  }
+  
+  .ms-form-range::-moz-range-thumb {
+    width: var(--ms-form-range-thumb-width);
+    height: var(--ms-form-range-thumb-height);
+    appearance: none;
+    background: var(--ms-form-range-thumb-bg);
+    border: var(--ms-form-range-thumb-border);
+    border-radius: var(--ms-form-range-thumb-border-radius);
+    box-shadow: var(--ms-form-range-thumb-box-shadow);
+    transition: var(--ms-form-range-thumb-transition);
+  }
+  
+  .ms-form-range::-moz-range-thumb:active {
+    background: var(--ms-form-range-thumb-active-bg);
+  }
+  
+  .ms-form-range::-moz-range-track {
+    width: var(--ms-form-range-track-width);
+    height: var(--ms-form-range-track-height);
+    color: transparent;
+    cursor: var(--ms-form-range-track-cursor);
+    background: var(--ms-form-range-track-bg);
+    border-color: transparent;
+    border-radius: var(--ms-form-range-track-border-radius);
+    box-shadow: var(--ms-form-range-track-box-shadow);
+  }
+  
+  .ms-form-range:disabled {
+    pointer-events: none;
+  }
+  
+  .ms-form-range:disabled::-webkit-slider-thumb {
+    background: var(--ms-form-range-thumb-disabled-bg);
+  }
+  
+  .ms-form-range:disabled::-moz-range-thumb {
+    background: var(--ms-form-range-thumb-disabled-bg);
+  }
+  

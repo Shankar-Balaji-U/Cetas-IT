@@ -1,0 +1,3 @@
+controladdin InValidManifestAddIn
+{
+}
