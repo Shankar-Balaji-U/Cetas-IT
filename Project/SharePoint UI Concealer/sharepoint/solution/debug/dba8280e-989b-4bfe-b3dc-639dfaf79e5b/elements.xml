@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="UiConcealer"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="900114dd-d5b3-4129-b1ac-e3b23e8e3f60"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>

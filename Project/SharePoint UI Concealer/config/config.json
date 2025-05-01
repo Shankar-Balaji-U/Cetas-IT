@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ui-concealer-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/uiConcealer/UiConcealerApplicationCustomizer.js",
+          "manifest": "./src/extensions/uiConcealer/UiConcealerApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "UiConcealerApplicationCustomizerStrings": "lib/extensions/uiConcealer/loc/{locale}.js"
+  }
+}
