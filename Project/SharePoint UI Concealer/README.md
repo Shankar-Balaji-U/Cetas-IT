@@ -5,7 +5,7 @@ SharePoint Framework (SPFx) is a client-side development framework used to build
 
 ## **Customizing the Application: UI Concealer**
 
-To achieve the project goal, we modified the default SPFx Application Customizer inside the `src/extensions` folder (typically under a name like `UiConcealer`). The custom code is used to **conditionally hide the SharePoint user interface** based on site-specific access rules.
+To achieve the project goal, we modified the default SPFx Application Customizer inside the `src/extensions` folder (typically under a name like `UiConcealer`). The custom code is used to **conditionally hide the SharePoint user interface** based on site-specific access rules. [Interview Q & A](./Interview-Questions.md)
 
 ### **Purpose**
 The primary objective of this customization is to:
