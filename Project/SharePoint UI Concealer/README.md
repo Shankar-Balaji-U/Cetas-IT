@@ -1,11 +1,11 @@
 # **Getting Started with SharePoint Framework (SPFx)**
 
 ## **Overview**
-SharePoint Framework (SPFx) is a client-side development framework used to build customizations for SharePoint. It is built using TypeScript and uses web technologies like React, Node.js, and modern JavaScript tooling.
+SharePoint Framework (SPFx) is a client-side development framework used to build customizations for SharePoint. It is built using TypeScript and uses web technologies like React, Node.js, and modern JavaScript tooling. [Interview Q & A](./Interview-Questions.md)
 
 ## **Customizing the Application: UI Concealer**
 
-To achieve the project goal, we modified the default SPFx Application Customizer inside the `src/extensions` folder (typically under a name like `UiConcealer`). The custom code is used to **conditionally hide the SharePoint user interface** based on site-specific access rules. [Interview Q & A](./Interview-Questions.md)
+To achieve the project goal, we modified the default SPFx Application Customizer inside the `src/extensions` folder (typically under a name like `UiConcealer`). The custom code is used to **conditionally hide the SharePoint user interface** based on site-specific access rules.
 
 ### **Purpose**
 The primary objective of this customization is to:
