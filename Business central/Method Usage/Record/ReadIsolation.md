@@ -1,4 +1,4 @@
-Excellent question. `ReadIsolation` in Business Central (AL) is a **powerful and advanced feature** used to control the locking behavior and consistency guarantees when reading data from the database.
+`ReadIsolation` in Business Central (AL) is a **powerful and advanced feature** used to control the locking behavior and consistency guarantees when reading data from the database.
 
 In simple terms, it allows you to choose between **reading the very latest committed data** (with potential performance trade-offs) and **reading a slightly older, but more performant, snapshot** of the data.
 
