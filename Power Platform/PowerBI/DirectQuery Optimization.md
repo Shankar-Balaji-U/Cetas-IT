@@ -6,9 +6,9 @@ The Power BI project involves three main tables from the data model:
 
 | Table Name              | Approx. Row Count | Refresh Frequency | Description                                                            |
 | ----------------------- | ----------------- | ----------------- | ---------------------------------------------------------------------- |
-| **Position History**    | 4–6 million+      | Daily (once)      | Historical transactional data used for position-level reporting        |
-| **Product Hedge Ratio** | 80–100            | Frequent          | Mapping and reference ratios for hedging calculations                  |
-| **Vesper Futures**      | 18,000+           | Frequent          | Futures price and contract data used for price lookup and calculations |
+| **Portfolio History**    | 4–6 million+      | Daily (once)      | Historical transactional data used for position-level reporting        |
+| **Delta Ratio** | 80–100            | Frequent          | Mapping and reference ratios for hedging calculations                  |
+| **Market Future Price**      | 18,000+           | Frequent          | Futures price and contract data used for price lookup and calculations |
 
 The client requirement is to build a **Power BI report using DirectQuery mode** for all data sources to ensure real-time updates without importing large datasets.
 
@@ -29,7 +29,7 @@ While DirectQuery provides live connectivity, it has significant limitations whe
 
 #### **1️⃣ All Tables in DirectQuery Mode**
 
-* **Setup:** All tables (`Position History`, `Product Hedge Ratio`, `Vesper Futures`) were connected using DirectQuery. All measures were created in DAX.
+* **Setup:** All tables (`Portfolio History`, `Delta Ratio`, `Market Future Price`) were connected using DirectQuery. All measures were created in DAX.
 * **Issue:** Report rendering failed due to query size.
   **Error:** “The resultset of a query to external data source has exceeded the maximum allowed rows.”
 * **Optimization Attempt:** Rewrote and optimized DAX measures to minimize context transitions and nested `SUMX`.
@@ -40,7 +40,7 @@ While DirectQuery provides live connectivity, it has significant limitations whe
 
 #### **2️⃣ Using `SUMMARIZE` Table in DirectQuery**
 
-* **Setup:** Created a new summarized table in Power BI using `SUMMARIZE` on `Position History`, converting key measures into columns.
+* **Setup:** Created a new summarized table in Power BI using `SUMMARIZE` on `Portfolio History`, converting key measures into columns.
 * **Observation:** Performance improved drastically; visuals loaded instantly.
 * **Limitation:** Summarized table data **did not refresh** dynamically with source updates unless schema changes were made.
 * **Reason:** `SUMMARIZE` creates a static snapshot at design time, not a live query.
@@ -50,15 +50,15 @@ While DirectQuery provides live connectivity, it has significant limitations whe
 
 #### **3️⃣ Dataflow-Level Pre-Aggregation**
 
-* **Setup:** Built a Power BI Dataflow that combines and aggregates `Position History`, `Product Hedge Ratio`, and `Vesper Futures` before loading.
+* **Setup:** Built a Power BI Dataflow that combines and aggregates `Portfolio History`, `Delta Ratio`, and `Market Future Price` before loading.
 * **Observation:** Dataflow queries ran slowly, and applying transformations (joins, filters, aggregations) caused refresh failures.
 * **Conclusion:** Dataflow-level pre-aggregation caused high load on the source and was unstable for large volumes.
 
 ---
 
-#### **4️⃣ Enriching `Position History` with Master Data (All in DirectQuery)**
+#### **4️⃣ Enriching `Portfolio History` with Master Data (All in DirectQuery)**
 
-* **Setup:** Added descriptive fields (name/description) from master tables into `Position History`.
+* **Setup:** Added descriptive fields (name/description) from master tables into `Portfolio History`.
   All tables remained in DirectQuery mode; aggregations done in DAX.
 * **Outcome:** Functional but performance degraded due to complex cross-table joins executed at query time.
 * **Visual Load Time:** Still high.
@@ -70,8 +70,8 @@ While DirectQuery provides live connectivity, it has significant limitations whe
 
 * **Setup:**
 
-  * `Position History` → **Import mode** (since it changes once daily)
-  * `Product Hedge Ratio` and `Vesper Futures` → **DirectQuery mode**
+  * `Portfolio History` → **Import mode** (since it changes once daily)
+  * `Delta Ratio` and `Market Future Price` → **DirectQuery mode**
 * **Outcome:**
 
   * Drastically improved performance for visuals.
