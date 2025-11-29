@@ -1,29 +1,27 @@
-$version = '24';
-$instances = Get-NAVServerInstance | Where-Object { $_.Version -like "$version*" };
+Import-Module 'C:\Program Files\Microsoft Dynamics 365 Business Central\240\Service\NavAdminTool.ps1'
 
-$ports = @(
-    'ManagementServicesPort',
-    'ClientServicesPort',
-    'SOAPServicesPort',
-    'ODataServicesPort',
-    'DeveloperServicesPort',
-    'SnapshotDebuggerServicesPort'
-);
+$version = '24'
+$instances = Get-NAVServerInstance | Where-Object { $_.Version -like "$version*" }
 
-foreach ($instance in $instances) {
+$results = foreach ($instance in $instances) {
     $config = Get-NAVServerConfiguration -ServerInstance $instance.ServerInstance
-    # Do something with $config if needed
- 
-    $config.ForEach({
-        if ($_.KeyName -in @(
-            'ManagementServicesPort',
-            'ClientServicesPort',
-            'SOAPServicesPort',
-            'ODataServicesPort',
-            'DeveloperServicesPort',
-            'SnapshotDebuggerServicesPort'
-        )) {
-            "$($_.KeyName) : $($_.Value)"
-        }
-    })
+    
+    $configHash = @{ServerInstance = $instance.ServerInstance}
+    $ports = @(
+        'ManagementServicesPort',
+        'ClientServicesPort', 
+        'SOAPServicesPort',
+        'ODataServicesPort',
+        'DeveloperServicesPort',
+        'SnapshotDebuggerServicesPort'
+    )
+    
+    foreach ($port in $ports) {
+        $configHash[$port] = ($config | Where-Object KeyName -eq $port).Value
+    }
+    
+    [PSCustomObject]$configHash
 }
+
+# Display as table
+$results | Format-Table -AutoSize
