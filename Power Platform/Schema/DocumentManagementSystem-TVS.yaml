@@ -1,0 +1,579 @@
+# ============================================
+# CONSTRUCTION DOCUMENT APPROVAL SYSTEM
+# SharePoint List Schema - Final Version
+# ============================================
+
+# ============================================
+# MASTER DATA
+# ============================================
+
+Site:
+  # Identification
+  Site ID: Text # Auto-generated from number series (Primary Key)
+  System ID: Text # SharePoint GUID
+  Name: Text # Required
+  
+  # Location & Size
+  Location Code: Text
+  Area Unit: Choice # Options: SqFt, SqM, Acres, Hectares
+  Area Size: Number
+  
+  # Site Details
+  Site Type: Choice # Options: Residential, Commercial, Industrial, Infrastructure, Mixed-Use
+  
+  # Ownership & Management
+  Owner Email ID: Person # Primary owner
+  Additional Owner Email IDs: Person (Multiple) # Co-owners
+  
+  # Status & Workflow
+  Status: Choice # Options: Planning, Active, On Hold, Completed, Closed
+  
+  # Dates
+  Start Date: Date
+  Target Completion Date: Date
+  Actual Completion Date: Date
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Is Deleted: Boolean # Default: No
+  Deleted By: Person
+  Deleted Date: DateTime
+
+# ============================================
+
+Project:
+  # Identification
+  Project ID: Text # Auto-generated from number series (Primary Key)
+  System ID: Text # SharePoint GUID
+  Name: Text # Required
+  Description: Multiple Lines of Text
+  
+  # Relationships
+  Site ID: Lookup (to Site) # Required
+  Template ID: Lookup (to Project Doc Template Header)
+  
+  # Project Details
+  Project Type: Choice # Options: New Construction, Renovation, Extension, Demolition, Maintenance
+  Area Unit: Choice # Options: SqFt, SqM, Acres, Hectares
+  Area Size: Number
+  Budget: Currency
+  Currency Code: Text # Default: USD
+  
+  # Ownership & Management
+  Owner Email ID: Person # Project Manager
+  Additional Owner Email IDs: Person (Multiple) # Co-managers
+  Requestor Email ID: Person # Project initiator
+  
+  # Status & Workflow
+  Status: Choice # Options: Draft, Pending Approval, Approved, Active, On Hold, Rejected, Completed, Closed
+  Workflow Status: Choice # Options: Not Started, In Progress, Under Review, Escalated
+  
+  # Dates
+  Created Date: DateTime
+  Start Date: Date
+  Target Completion Date: Date
+  Actual Completion Date: Date
+  
+  # Audit Trail
+  Created By: Person
+  Modified By: Person
+  Modified Date: DateTime
+  Is Deleted: Boolean # Default: No
+  Deleted By: Person
+  Deleted Date: DateTime
+
+# ============================================
+# DOCUMENT MANAGEMENT
+# ============================================
+
+Project Folder Line:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Project ID: Lookup (to Project) # Required
+  Parent Folder ID: Lookup (to Project Folder Line) # For nested folders, Optional
+  
+  # Folder Details
+  Folder Name: Text # Required
+  Folder Path: Text # Full hierarchical path
+  Folder Level: Number # 1 for root, 2 for sub-folder, etc.
+  Folder Type: Choice # Options: Standard, Regulatory, QA/QC, RFI, Submittals, As-Built
+  Description: Multiple Lines of Text
+  
+  # Permissions
+  Restricted Access: Boolean # Default: No
+  Allowed Users: Person (Multiple)
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Is Deleted: Boolean # Default: No
+  Deleted By: Person
+  Deleted Date: DateTime
+
+# ============================================
+
+Project Document Line:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Project ID: Lookup (to Project) # Required
+  Project Folder ID: Lookup (to Project Folder Line) # Required
+  
+  # Document Details
+  File Name: Text # Required
+  File Type: Text # Extension: .pdf, .dwg, .xlsx, etc.
+  File Size: Number # In bytes
+  Document Number: Text # Custom document numbering
+  Document Title: Text
+  Document Type: Choice # Options: Drawing, Specification, Report, Certificate, RFI, Submittal, Change Order, Photo, Other
+  
+  # Version Control
+  Version: Number # Default: 1.0
+  Is Latest Version: Boolean # Default: Yes
+  Superseded By Document ID: Lookup (to Project Document Line) # If replaced
+  
+  # Classification
+  Document Category: Choice # Options: Design, Construction, Administrative, Safety, Quality, Financial
+  Discipline: Choice # Options: Architectural, Structural, MEP, Civil, Landscape, Interior
+  Confidentiality Level: Choice # Options: Public, Internal, Confidential, Restricted
+  
+  # Storage
+  SharePoint URL: Hyperlink # Direct link to file
+  Repository Path: Text # Alternative storage path if needed
+  Checksum: Text # MD5 or SHA256 hash for integrity
+  
+  # Status & Workflow
+  Document Status: Choice # Options: Draft, In Review, Pending Approval, Approved, Rejected, Superseded, Obsolete, Archived
+  Review Required: Boolean # Default: No
+  Approval Required: Boolean # Default: No
+  
+  # Retention
+  Retention Period: Number # In years
+  Retention End Date: Date
+  Legal Hold: Boolean # Default: No
+  
+  # Upload Information
+  Uploaded By Email ID: Person # Required
+  Upload Date: DateTime
+  
+  # Modification Tracking
+  Attachment Modified Date: DateTime # When file was last changed
+  Comments: Multiple Lines of Text
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Is Deleted: Boolean # Default: No
+  Deleted By: Person
+  Deleted Date: DateTime
+
+# ============================================
+# APPROVAL WORKFLOW
+# ============================================
+
+Project Doc Approval Setup:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Template ID: Lookup (to Project Doc Template Header)
+  Document Type: Choice # Which document types use this setup
+  
+  # Approval Configuration
+  Approval Level: Number # 1, 2, 3 for multi-level approvals
+  Required Approvers Count: Number # Minimum approvers needed at this level
+  Allow Parallel Approval: Boolean # Multiple approvers at same time
+  Allow Rejection: Boolean # Can approver reject at this level
+  Require All Approvers: Boolean # All must approve vs. minimum count
+  
+  # Escalation
+  Auto Escalation Enabled: Boolean
+  Auto Escalation Days: Number # Days before escalation
+  Escalation Email ID: Person
+  Escalation Level: Number # Next level to escalate to
+  
+  # Notifications
+  Send Reminder: Boolean
+  Reminder Days: Number # Days before reminder
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Is Active: Boolean # Default: Yes
+
+# ============================================
+
+Project Doc Approval Line:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Project ID: Lookup (to Project) # Required
+  Document Line ID: Lookup (to Project Document Line) # Required
+  
+  # Approval Details
+  Approval Level: Number # Sequence of approval (1, 2, 3, etc.)
+  Approval Sequence: Number # Order within same level
+  Approver Email ID: Person # Required
+  Delegated From Email ID: Person # If delegated
+  
+  # Status & Response
+  Status: Choice # Options: Pending, Approved, Rejected, Delegated, Recalled, Expired
+  Response Date: DateTime
+  Comment: Multiple Lines of Text
+  Rejection Reason: Multiple Lines of Text
+  
+  # Dates
+  Requested Date: DateTime
+  Due Date: DateTime
+  Reminder Sent Date: DateTime
+  
+  # Metadata
+  IP Address: Text # For audit purposes
+  User Agent: Text # Browser/device info
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+
+# ============================================
+
+Approval History:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Document Line ID: Lookup (to Project Document Line) # Required
+  Approval Line ID: Lookup (to Project Doc Approval Line)
+  
+  # Action Details
+  Approver Email ID: Person # Required
+  Action: Choice # Options: Submitted, Approved, Rejected, Delegated, Recalled, Escalated, Expired, Modified
+  Action Date: DateTime # Required
+  
+  # Status Tracking
+  Previous Status: Choice
+  New Status: Choice
+  
+  # Comments & Details
+  Comment: Multiple Lines of Text
+  System Comment: Multiple Lines of Text # Auto-generated notes
+  
+  # Metadata
+  IP Address: Text
+  User Agent: Text
+  Location: Text # Geo-location if available
+  
+  # Audit
+  Created By: Person
+  Created Date: DateTime
+
+# ============================================
+# TEMPLATES
+# ============================================
+
+Project Doc Template Header:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  Template Code: Text # Unique code
+  
+  # Template Details
+  Title: Text # Required
+  Description: Multiple Lines of Text
+  Template Type: Choice # Options: Residential, Commercial, Infrastructure, Custom
+  Industry: Choice # Options: Construction, Engineering, Architecture
+  
+  # Configuration
+  Is Default: Boolean # Default: No
+  Is Active: Boolean # Default: Yes
+  Version: Number # Default: 1.0
+  
+  # Usage Tracking
+  Usage Count: Number # How many projects use this
+  Last Used Date: DateTime
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+
+# ============================================
+
+Project Doc Template Line:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Template ID: Lookup (to Project Doc Template Header) # Required
+  Parent Folder ID: Lookup (to Project Doc Template Line) # For nested structure
+  
+  # Folder Details
+  Folder Name: Text # Required
+  Folder Level: Number # Hierarchy level
+  Folder Path: Text # Full path
+  Sort Order: Number # Display order
+  
+  # Configuration
+  Is Mandatory: Boolean # Must be included in project
+  Description: Multiple Lines of Text
+  Folder Type: Choice # Options: Standard, Regulatory, QA/QC, RFI, Submittals, As-Built
+  
+  # Default Settings
+  Default Document Types: Choice (Multiple) # Expected document types
+  Restricted Access: Boolean # Default: No
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Is Active: Boolean # Default: Yes
+
+# ============================================
+# SYSTEM CONFIGURATION
+# ============================================
+
+Setup:
+  # Identification
+  ID: Counter # Primary Key (Should only have 1 record)
+  System ID: Text # SharePoint GUID
+  
+  # Number Series Configuration
+  Site ID Prefix: Text # Default: "SITE-"
+  Project ID Prefix: Text # Default: "PROJ-"
+  Last Used Site No: Number # Default: 0
+  Last Used Project No: Number # Default: 0
+  Number Series Length: Number # Default: 5 (e.g., SITE-00001)
+  
+  # System Settings
+  Auto Approval Enabled: Boolean # Default: No
+  Auto Archive Days: Number # Days before auto-archiving old documents
+  Default Retention Period: Number # Default retention in years
+  Max File Size MB: Number # Maximum upload size in MB
+  Allowed File Types: Multiple Lines of Text # Comma-separated extensions
+  
+  # Email Configuration
+  Send Email Notifications: Boolean # Default: Yes
+  Admin Email ID: Person
+  System Email From: Text # Email address for system notifications
+  
+  # Regional Settings
+  Default Currency: Text # Default: USD
+  Default Area Unit: Choice # Default: SqFt
+  Date Format: Text # Default: MM/DD/YYYY
+  Time Zone: Text # Default: UTC
+  
+  # Security
+  Enable Audit Log: Boolean # Default: Yes
+  Require Comments on Rejection: Boolean # Default: Yes
+  Require Comments on Approval: Boolean # Default: No
+  Enable Document Versioning: Boolean # Default: Yes
+  Max Versions to Retain: Number # Default: 10
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+  Last Modified Section: Text # Which setting was last changed
+
+# ============================================
+# SUPPORTING TABLES
+# ============================================
+
+Project Team:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Project ID: Lookup (to Project) # Required
+  
+  # Team Member Details
+  User Email ID: Person # Required
+  Role: Choice # Options: Project Manager, Site Engineer, QA/QC Manager, Safety Officer, Architect, Consultant, Contractor, Subcontractor, Reviewer, Contributor, Viewer
+  Department: Text
+  Company: Text
+  
+  # Permissions
+  Can Upload Documents: Boolean # Default: No
+  Can Approve Documents: Boolean # Default: No
+  Can Delete Documents: Boolean # Default: No
+  Can Modify Project: Boolean # Default: No
+  
+  # Dates
+  Start Date: Date
+  End Date: Date
+  
+  # Status
+  Is Active: Boolean # Default: Yes
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+
+# ============================================
+
+Document Change Log:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Document Line ID: Lookup (to Project Document Line) # Required
+  
+  # Change Details
+  Change Type: Choice # Options: Created, Modified, Deleted, Restored, Approved, Rejected, Version Updated, Moved, Renamed
+  Field Name: Text # Which field was changed
+  Old Value: Multiple Lines of Text
+  New Value: Multiple Lines of Text
+  
+  # Change Context
+  Reason: Multiple Lines of Text
+  Impact: Choice # Options: Minor, Major, Critical
+  
+  # User Information
+  Changed By: Person # Required
+  Change Date: DateTime # Required
+  IP Address: Text
+  
+  # Audit
+  Created By: Person
+  Created Date: DateTime
+
+# ============================================
+
+Notification Queue:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Recipient Details
+  Recipient Email ID: Person # Required
+  CC Email IDs: Person (Multiple)
+  BCC Email IDs: Person (Multiple)
+  
+  # Notification Details
+  Notification Type: Choice # Options: Approval Request, Approval Reminder, Document Upload, Status Change, Escalation, Rejection, Comment Added, Due Date Alert
+  Subject: Text
+  Body: Multiple Lines of Text
+  Priority: Choice # Options: Low, Normal, High, Urgent
+  
+  # Reference Information
+  Reference ID: Text # ID of related item (Project ID, Document ID, etc.)
+  Reference Type: Choice # Options: Project, Document, Approval, Site
+  Reference URL: Hyperlink # Direct link to item
+  
+  # Status & Scheduling
+  Status: Choice # Options: Pending, Sent, Failed, Cancelled
+  Scheduled Date: DateTime
+  Sent Date: DateTime
+  Failed Reason: Multiple Lines of Text
+  Retry Count: Number # Default: 0
+  Max Retries: Number # Default: 3
+  
+  # Audit Trail
+  Created By: Person
+  Created Date: DateTime
+  Modified By: Person
+  Modified Date: DateTime
+
+# ============================================
+
+Comment Thread:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  System ID: Text # SharePoint GUID
+  
+  # Relationships
+  Document Line ID: Lookup (to Project Document Line)
+  Parent Comment ID: Lookup (to Comment Thread) # For threaded replies
+  
+  # Comment Details
+  Comment Text: Multiple Lines of Text # Required
+  Comment Type: Choice # Options: General, Question, Issue, Suggestion, Resolution
+  Is Internal: Boolean # Internal vs external stakeholder comment
+  
+  # Status
+  Is Resolved: Boolean # Default: No
+  Resolved By: Person
+  Resolved Date: DateTime
+  
+  # Mentions & Notifications
+  Mentioned Users: Person (Multiple)
+  
+  # Audit Trail
+  Created By: Person # Required
+  Created Date: DateTime # Required
+  Modified By: Person
+  Modified Date: DateTime
+  Is Deleted: Boolean # Default: No
+  Deleted By: Person
+  Deleted Date: DateTime
+
+# ============================================
+# REPORTING & ANALYTICS
+# ============================================
+
+Document Statistics:
+  # Identification
+  ID: Counter # Auto-increment (Primary Key)
+  Report Date: Date # Required
+  
+  # Relationships
+  Project ID: Lookup (to Project)
+  Site ID: Lookup (to Site)
+  
+  # Document Counts
+  Total Documents: Number
+  Pending Approval: Number
+  Approved Documents: Number
+  Rejected Documents: Number
+  Draft Documents: Number
+  Obsolete Documents: Number
+  
+  # Storage Metrics
+  Total Storage MB: Number
+  Average File Size MB: Number
+  
+  # Approval Metrics
+  Average Approval Time Days: Number
+  Pending Approvals: Number
+  Overdue Approvals: Number
+  
+  # Activity Metrics
+  Documents Uploaded This Month: Number
+  Documents Approved This Month: Number
+  Active Users: Number
+  
+  # Audit
+  Created By: Person
+  Created Date: DateTime
+
+# ============================================
+# END OF SCHEMA
+# ============================================
