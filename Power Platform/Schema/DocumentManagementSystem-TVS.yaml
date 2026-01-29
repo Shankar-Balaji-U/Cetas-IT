@@ -99,6 +99,8 @@ Project Document Line:
   # Version Control
   Version: Number # Default: 1
   Latest Version: Boolean # Default: Yes
+
+  Repository: Boolean
   
   # Status
   Status: Choice # Options: Draft, In Review, Pending Approval, Approved, Rejected
