@@ -65,9 +65,6 @@ Project:
 # ============================================
 # DOCUMENT MANAGEMENT
 # ============================================
-Project Folder Template Category:
-  Title: Text # Required
-
 Project Folder Line:
   # Identification
   ID: Existing Field # Auto-increment (Primary Key)
@@ -193,6 +190,8 @@ Project Doc Template Line:
   Modified By: Text # Email address
   Modified Date: DateTime
 
+Project Doc Template Category:
+  Title: Text # Required // Folder Names
 
 # ============================================
 # SYSTEM CONFIGURATION
