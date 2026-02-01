@@ -44,7 +44,8 @@ Project:
   Site ID: Lookup (to Site) # Required
   Template ID: Lookup (to Project Doc Template Header)
   
-  # Project Details
+  # Location & Size
+  Location Code: Text
   Area Unit: Choice # Options: SqFt, SqM, Acres, Hectares
   Area Size: Number
   
