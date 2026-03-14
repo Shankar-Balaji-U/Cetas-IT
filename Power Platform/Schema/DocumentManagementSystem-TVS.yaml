@@ -8,6 +8,30 @@
 # MASTER DATA
 # ============================================
 
+
+User:
+  # Identification
+  ID: Existing Field # Auto-increment (Primary Key)
+  Code: Text # Auto Generated based on No Series Prifix Setup.
+  Name: Text # Required
+  
+  Email ID: Text
+  
+  # Ownership
+  Role: Choice # Options: User, Admin, Approver, System Admin
+  
+  # Status
+  Status: Choice # Options: Active, In-Active
+
+  Avatar: Image
+  
+  # Audit Trail
+  Created By: Text # Email address
+  Created Date: DateTime
+  Modified By: Text # Email address
+  Modified Date: DateTime
+
+
 Site:
   # Identification
   ID: Existing Field # Auto-increment (Primary Key)
