@@ -24,19 +24,6 @@ An error has occurred during the full-text query. Common causes include: word-br
 
 ---
 
-# Environment Details
-
-| Parameter            | Value                                        |
-| -------------------- | -------------------------------------------- |
-| Application          | Microsoft Dynamics 365 Business Central 25.2 |
-| Database Server      | CIT257\SQLEXPRESS                            |
-| Database Name        | Demo Database BC (25-2)                      |
-| Client Type          | Web Client                                   |
-| Affected Page        | Customer List (Page 22)                      |
-| SQL Feature Involved | SQL Server Full-Text Search                  |
-
----
-
 # Root Cause
 
 Business Central uses SQL Server Full-Text Search for optimized searching on master pages such as:
@@ -67,31 +54,7 @@ This issue was related to SQL Server Full-Text Search infrastructure and was not
 
 # Analysis Performed
 
-## 1. Event Viewer Analysis
-
-The detailed error information was identified from:
-
-```text id="4scljlwm"
-Windows Event Viewer
-```
-
-Path:
-
-```text id="1zj5n7"
-Windows Logs → Application
-```
-
-Source:
-
-```text id="n7xk1s"
-MicrosoftDynamicsNavServer$BC252
-```
-
-The event log contained the failing SQL query and exception details.
-
----
-
-## 2. SQL Query Validation
+## 1. SQL Query Validation
 
 The SQL statement from the event log contained the following condition:
 
@@ -109,7 +72,7 @@ This confirmed that:
 
 ---
 
-## 3. Full-Text Feature Validation
+## 2. Full-Text Feature Validation
 
 The following query was executed to verify whether SQL Full-Text Search was installed:
 
@@ -127,7 +90,7 @@ This confirmed that the SQL Full-Text Search feature was installed successfully.
 
 ---
 
-## 4. Full-Text Catalog Identification
+## 3. Full-Text Catalog Identification
 
 The following query was executed to identify the available Full-Text catalogs and associated tables:
 
